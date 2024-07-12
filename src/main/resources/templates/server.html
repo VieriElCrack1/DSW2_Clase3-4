@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Servidor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+</head>
+<body>
+    <div class="container clearfix">
+        <div class="people-list" id="people-list">
+            <div class="search">
+                <input id="userName" placeholder="search" type="text" value="server">
+                <div class="contenido">
+                    <button class="btn-iniciar btn-iniciar-cliente">Iniciar</button>
+                    <button class="btn-refrescar">Refrescar</button>
+                </div>
+            </div>
+            <ul class="list" id="usersList">
+
+            </ul>
+        </div>
+
+        <div class="chat">
+            <div class="chat-header clearfix">
+                <img alt="avatar" height="55px" width="55px" th:src="@{/resources/img/server.png}">
+
+                <div class="chat-about">
+                    <div class="chat-with" id="selectUserId"></div>
+                    <div class="chat-num-messages"></div>
+                </div>
+                <i class="fa fa-start"></i>
+            </div>
+
+            <div class="chat-history">
+                <ul>
+
+                </ul>
+            </div>
+
+            <div class="chat-message clearfix">
+                <textarea id="message-to-send" name="message-to-send" placeholder="Ingresar Mensaje" rows="3"></textarea>
+                <button id="sendBtnServer" class="btn-enviar-mensajeServer">Enviar</button>
+            </div>
+        </div>
+
+    </div>
+    <!-- Mensaje del servidor que muestre en el chat -->
+    <script id="menssage-template" type="text/x-handlebars-template">
+        <li class="clearfix">
+            <div class="menssage-data align-right">
+                <span class="message-data-time">{{time}}</span> &nbsp; &nbsp;
+                <span class="message-data-name">{{toUserName}}</span>
+                <i class="fa fa-circle me"></i>
+            </div>
+            <div class="message other-message float-right">
+                {{messageOutput}}
+            </div>
+        </li>
+    </script>
+    <!-- Mensaje que recibe el servidor de los clientes y se muestra en el chat -->
+    <script id="message-response-template" type="text/x-handlebars-template">
+        <li>
+            <div class="menssage-data">
+                <span class="message-data-name">
+                    <i class="fa fa-circle online"></i>
+                    {{userName}}
+                </span>
+                <span class="message-data-time">{{time}}</span>
+            </div>
+            <div class="message my-message">
+                {{response}}
+            </div>
+        </li>
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+    <!-- libs for stomp and sockjs -->
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@4.0.8/lib/stomp.min.js"></script>
+    <!-- end for stomp and sockjs -->
+    <script th:src="@{/resources/js/custom.js}"></script>
+    <script th:src="@{/resources/js/chat.js}"></script>
+</body>
+</html>
